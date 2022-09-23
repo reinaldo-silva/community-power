@@ -1,10 +1,11 @@
-import { Plus } from "phosphor-react";
+import { CircleNotch, Plus } from "phosphor-react";
 import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BodyPage } from "../components/BodyPage";
 import { Button } from "../components/Button";
 import { Dropdown } from "../components/Dropdown";
 import { Input } from "../components/Input";
+import { Loading } from "../components/Loading";
 import { LoggedInUsers } from "../components/loggedInUsers";
 import { socket, useAuthContext } from "../context/Auth";
 import { chats } from "../utils/chatsData";
@@ -36,9 +37,12 @@ const ChatCard: React.FC<ChatCardProps> = ({
       </div>
       <LoggedInUsers users={users} />
 
-      <div className="text-sm absolute w-8 h-8 flex justify-center items-center top-[-10px] right-[-10px] bg-gradient-to-r from-pink-500 to-orange-500 p-1 rounded-full">
+      <div className="z-10 text-sm absolute w-8 h-8 flex justify-center items-center top-[-10px] right-[-10px] bg-gradient-to-r from-pink-500 to-orange-500 p-1 rounded-full">
         {totalMessages}
       </div>
+      {totalMessages > 0 && (
+        <span className="animate-ping text-sm absolute w-6 h-6 flex justify-center items-center top-[-6px] right-[-6px] bg-gradient-to-r from-pink-500 to-orange-500 p-1 rounded-full"></span>
+      )}
     </div>
   );
 };
@@ -107,15 +111,19 @@ const Chats: React.FC = () => {
         <div className="flex flex-col gap-6">
           <h2 className="text-gray-100 font-bold text-lg">Chats disponíveis</h2>
 
-          {chatsInfo.map((chat) => (
-            <ChatCard
-              isOnline={true}
-              totalMessages={chat.messagesCount}
-              users={chat.usersConnects}
-              key={chat.id}
-              description={chat.description}
-            />
-          ))}
+          {chatsInfo[0] ? (
+            chatsInfo.map((chat) => (
+              <ChatCard
+                isOnline={true}
+                totalMessages={chat.messagesCount}
+                users={chat.usersConnects}
+                key={chat.id}
+                description={chat.description}
+              />
+            ))
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
     </BodyPage>

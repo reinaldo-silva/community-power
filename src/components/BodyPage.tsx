@@ -60,7 +60,7 @@ const BodyPage: React.FC<BodyPageProps> = ({ children, breadcrumbs }) => {
         {breadcrumbs && <Breadcrumbs data={breadcrumbs} />}
       </div>
 
-      <main className="flex flex-1 w-full h-[100vh-80px] max-w-[1200px] px-8 overflow-y-auto">
+      <main className="flex flex-1 w-full h-[100vh-80px] max-w-[1200px] px-8 overflow-y-auto justify-center">
         {children}
       </main>
     </div>

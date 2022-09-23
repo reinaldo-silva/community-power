@@ -9,7 +9,7 @@ interface LoggedInUsersProps {
 const LoggedInUsers: React.FC<LoggedInUsersProps> = ({ users, limit = 3 }) => {
   return (
     <div className="flex ">
-      {users.slice(0, 3).map((user, key) => (
+      {users.slice(0, limit).map((user, key) => (
         <div key={key} className="flex">
           <div
             className={`w-8 h-8 bg-slate-900 rounded-full flex justify-center items-center`}

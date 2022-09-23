@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { BodyPage } from "../components/BodyPage";
 import { Button } from "../components/Button";
 import { CardPost, Post } from "../components/CardPost";
+import { Loading } from "../components/Loading";
 import { api } from "../service/api";
 
 const Home: React.FC = () => {
@@ -32,15 +33,19 @@ const Home: React.FC = () => {
             <Button description="Novo post" />
           </div>
         </div>
-        <div className="w-full h-auto grid grid-cols-3 gap-4 pb-8">
-          {posts?.map((post) => (
-            <CardPost
-              key={post.id}
-              loadTimeline={getTimelineData}
-              post={post}
-            />
-          ))}
-        </div>
+        {posts ? (
+          <div className="w-full h-auto grid grid-cols-3 gap-4 pb-8">
+            {posts?.map((post) => (
+              <CardPost
+                key={post.id}
+                loadTimeline={getTimelineData}
+                post={post}
+              />
+            ))}
+          </div>
+        ) : (
+          <Loading />
+        )}
       </div>
     </BodyPage>
   );
