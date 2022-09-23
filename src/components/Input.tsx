@@ -8,4 +8,4 @@ const Input: React.FC<InputProps> = ({ ...rest }) => {
   );
 };
 
-export default Input;
+export { Input };

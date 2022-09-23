@@ -13,7 +13,7 @@ interface BreadcrumbsProps {
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ data }) => {
   return (
-    <nav className="w-full px-8 pb-2">
+    <nav className="w-full px-8 pb-4">
       <ol className="list-reset flex items-center">
         {data.map((item, index) => (
           <li key={index} className="flex items-center gap-2">

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import BodyPage from "../components/BodyPage";
+import { BodyPage } from "../components/BodyPage";
 import { Button } from "../components/Button";
 import { CardPost, Post } from "../components/CardPost";
 import { api } from "../service/api";
@@ -7,14 +7,22 @@ import { api } from "../service/api";
 const Home: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>();
 
-  const getTimelineData = useCallback(() => {
-    api.get<Post[]>("posts").then((response) => {
-      setPosts(response.data);
-    });
+  const getTimelineData = useCallback(async () => {
+    await api
+      .get<Post[]>("posts")
+      .then((response) => {
+        setPosts(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log({ err });
+        return err;
+      });
   }, []);
 
   useEffect(() => {
     getTimelineData();
+    console.log("aqui");
   }, []);
 
   return (

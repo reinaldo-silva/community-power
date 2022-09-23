@@ -3,7 +3,7 @@ import { ptBR } from "date-fns/locale";
 import { ChartLineUp, Clock, Heart, PencilSimpleLine } from "phosphor-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import BodyPage from "../components/BodyPage";
+import { BodyPage } from "../components/BodyPage";
 import { Post } from "../components/CardPost";
 import { useAuthContext } from "../context/Auth";
 import { api } from "../service/api";

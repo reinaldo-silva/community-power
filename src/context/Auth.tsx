@@ -4,9 +4,11 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useState,
 } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router-dom";
+import { io } from "socket.io-client";
 import { api } from "../service/api";
 
 interface LoginResponse {
@@ -28,6 +30,14 @@ interface CookiesData {
   email?: string;
 }
 
+interface ChatsInfos {
+  description: string;
+  id: number;
+  usersConnects: String[];
+  messagesCount: number;
+  usersSocketIds: String[];
+}
+
 export interface AuthContextData {
   signOut: () => void;
   signIn: (data: {
@@ -35,7 +45,14 @@ export interface AuthContextData {
     password: string;
   }) => Promise<{ error?: boolean; data: LoginResponse }>;
   cookies: CookiesData;
+  name: string;
+  setName: (name: string) => void;
+  chatsInfo: ChatsInfos[];
 }
+
+export const socket = io("0236-45-176-26-44.ngrok.io", {
+  auth: {},
+});
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -47,7 +64,22 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     "email",
   ]);
   const navigate = useNavigate();
-  const param = useParams();
+  const [name, setName] = useState("");
+  const [chatsInfo, setChatsInfos] = useState<ChatsInfos[]>([]);
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connect");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("disconnect");
+    });
+
+    socket.on("chats", ({ arrayChats }) => {
+      setChatsInfos(arrayChats);
+    });
+  }, []);
 
   const signOut = useCallback(() => {
     removeCookie("name");
@@ -124,6 +156,9 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         cookies,
         signIn,
         signOut,
+        name,
+        setName,
+        chatsInfo,
       }}
     >
       {children}

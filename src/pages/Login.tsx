@@ -1,8 +1,8 @@
 import React, { FormEvent, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import BodyPage from "../components/BodyPage";
+import { BodyPage } from "../components/BodyPage";
 import { Button } from "../components/Button";
-import Input from "../components/Input";
+import { Input } from "../components/Input";
 import { useAuthContext } from "../context/Auth";
 
 const Login: React.FC = () => {

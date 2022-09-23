@@ -32,6 +32,17 @@ module.exports = {
         },
       },
     },
+    tooltipArrows: (theme) => ({
+      "danger-arrow": {
+        borderWidth: 1,
+        backgroundColor: theme("colors.slate.800"),
+        size: 10,
+        offset: 10,
+      },
+    }),
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("tailwindcss-tooltip-arrow-after")(),
+  ],
 };
