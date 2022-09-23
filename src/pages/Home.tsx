@@ -12,7 +12,6 @@ const Home: React.FC = () => {
       .get<Post[]>("posts")
       .then((response) => {
         setPosts(response.data);
-        console.log(response.data);
       })
       .catch((err) => {
         console.log({ err });
@@ -22,7 +21,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     getTimelineData();
-    console.log("aqui");
   }, []);
 
   return (

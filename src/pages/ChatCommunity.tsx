@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import io from "socket.io-client";
 import { BodyPage } from "../components/BodyPage";
 import { Input } from "../components/Input";
+import { LoggedInUsers } from "../components/loggedInUsers";
 import { socket, useAuthContext } from "../context/Auth";
 import { chats } from "../utils/chatsData";
 
@@ -53,7 +54,7 @@ const ChatCommunity: React.FC = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { name } = useAuthContext();
+  const { name, chatsInfo } = useAuthContext();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Messages[]>([]);
 
@@ -100,10 +101,22 @@ const ChatCommunity: React.FC = () => {
     >
       <div className="py-8 flex justify-around w-full">
         <div className="bg-slate-900 w-full rounded-md flex flex-col justify-between">
-          <h2 className="drop-shadow-md rounded-t-md p-4 bg-slate-800 text-gray-100 font-bold text-lg">
-            #
-            {chats.find((chat) => String(chat.id) === params.chat)?.description}
-          </h2>
+          <div className="drop-shadow-md rounded-t-md p-4 bg-slate-800 text-gray-100 font-bold text-lg flex justify-between">
+            <h2>
+              #
+              {
+                chats.find((chat) => String(chat.id) === params.chat)
+                  ?.description
+              }
+            </h2>
+            <LoggedInUsers
+              users={
+                chatsInfo.find((chat) => String(chat.id) === params.chat)
+                  ?.usersConnects || []
+              }
+              limit={7}
+            />
+          </div>
           <div className="p-6 flex h-full flex-col-reverse gap-4 overflow-auto">
             {messages.map((message, key) => (
               <Message

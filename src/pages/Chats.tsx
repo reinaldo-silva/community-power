@@ -5,6 +5,7 @@ import { BodyPage } from "../components/BodyPage";
 import { Button } from "../components/Button";
 import { Dropdown } from "../components/Dropdown";
 import { Input } from "../components/Input";
+import { LoggedInUsers } from "../components/loggedInUsers";
 import { socket, useAuthContext } from "../context/Auth";
 import { chats } from "../utils/chatsData";
 
@@ -33,28 +34,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
           {isOnline ? "online" : "offline"}
         </small>
       </div>
-      <div className="flex ">
-        {users.slice(0, 3).map((user, key) => (
-          <div key={key} className="flex">
-            <div
-              className={`w-8 h-8 bg-slate-900 rounded-full flex justify-center items-center`}
-            >
-              {user.substring(0, 1)}
-            </div>
-            {users.length > 3 && key === 2 && (
-              <div className="w-8 h-8 bg-slate-900 rounded-full flex justify-center items-center">
-                <Plus weight="bold" />
-              </div>
-            )}
-          </div>
-        ))}
-
-        {users.length === 0 && (
-          <small className="flex justify-end text-[12px] w-[120px]">
-            Nenhum usuário conectado
-          </small>
-        )}
-      </div>
+      <LoggedInUsers users={users} />
 
       <div className="text-sm absolute w-8 h-8 flex justify-center items-center top-[-10px] right-[-10px] bg-gradient-to-r from-pink-500 to-orange-500 p-1 rounded-full">
         {totalMessages}
