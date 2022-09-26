@@ -127,6 +127,11 @@ const ChatCommunity: React.FC = () => {
               />
             ))}
           </div>
+          <div className="p-2 flex justify-center">
+            <div className="bg-slate-700 p-2 text-xs rounded-md">
+              Logado como: <strong>{name}</strong>
+            </div>
+          </div>
           <form
             onSubmit={sendMessage}
             className="drop-shadow-md p-4 bg-slate-800 rounded-b-md flex justify-center items-center"

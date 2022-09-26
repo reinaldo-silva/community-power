@@ -9,7 +9,7 @@ const Button: React.FC<ButtonProps> = ({ description, children, ...rest }) => {
   return (
     <button
       type="submit"
-      className="bg-gradient-to-r from-pink-500 to-orange-500 p-4 w-full mt-4 rounded-md text-sm uppercase font-bold hover:shadow-xl transition disabled:opacity-50 flex gap-2 justify-center items-center disabled:cursor-not-allowed"
+      className="bg-gradient-to-r from-pink-500 to-orange-500 p-4 w-full rounded-md text-sm uppercase font-bold hover:shadow-xl transition disabled:opacity-50 flex gap-2 justify-center items-center disabled:cursor-not-allowed"
       {...rest}
     >
       <span>{description}</span>

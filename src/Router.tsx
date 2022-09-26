@@ -6,6 +6,7 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { PostPage } from "./pages/Post";
 import { SignUp } from "./pages/SignUp";
+import Creative from "./pages/Creative";
 
 const Router: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const Router: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signUp" element={<SignUp />} />
+      <Route path="/creative" element={<Creative />} />
       <Route path="/chats" element={<Chats />} />
       <Route path="/chats/:chat" element={<ChatCommunity />} />
       <Route path="/post/:slug" element={<PostPage />} />

@@ -50,7 +50,7 @@ export interface AuthContextData {
   chatsInfo: ChatsInfos[];
 }
 
-export const socket = io("0236-45-176-26-44.ngrok.io", {
+export const socket = io("localhost:3333", {
   auth: {},
 });
 

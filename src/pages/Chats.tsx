@@ -77,11 +77,11 @@ const Chats: React.FC = () => {
 
   return (
     <BodyPage breadcrumbs={[{ description: "Chats", to: "/chats" }]}>
-      <div className="py-8 flex justify-around w-full">
+      <div className="flex justify-around w-full">
         <form className="w-[400px] flex flex-col gap-6" onSubmit={joinChat}>
           <h2 className="text-gray-100 font-bold text-lg">Community chats</h2>
 
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center gap-6">
             <h3
               className={`${
                 chatSelected !== 0
@@ -108,7 +108,7 @@ const Chats: React.FC = () => {
           />
         </form>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex-col gap-6 hidden md:flex">
           <h2 className="text-gray-100 font-bold text-lg">Chats disponíveis</h2>
 
           {chatsInfo[0] ? (
